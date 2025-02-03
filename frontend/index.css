@@ -1,0 +1,49 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    /* ebf2ff  */
+    background-color: rgba(227, 249, 255, 0.908) !important;
+}
+/* Custom Div : Section 3 */
+.add_new_btn_mobile_only button{
+    position: absolute;
+    bottom: 0;
+    z-index: 3;
+    right: 0;
+    margin: 3%;
+    width: 93%;
+}
+.add_new_btn_mobile_only{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 65px;
+    background: white;
+    padding: 15px 10px;
+    z-index: 3;
+}
+
+@media only screen and (min-width : 768px) {
+    .add_new_btn_mobile_only{
+        display: none;
+    }
+}
+
+@media only screen and (max-width : 760px) {
+    .nav__add__button{
+        display: none;
+    }
+}
+
+.descriptions {
+    max-height: 3em; /* Adjust this value to limit the number of lines */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* Adjust this value to limit the number of lines */
+    -webkit-box-orient: vertical;
+}
