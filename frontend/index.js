@@ -47,7 +47,7 @@ const state = {
 // Bill data loader
 const LoadInitialData = async () => {
     try {
-        const localStorageCopy = await axios.get(`http://127.0.0.1:8000/api/bills/`)
+        const localStorageCopy = await axios.get(`https://ms-messenger.onrender.com/api/bills/`)
         if(localStorageCopy != null) state.bill_list = localStorageCopy.data; 
     } catch (error) {
         taskContent.insertAdjacentHTML("beforeend",loading)
@@ -65,7 +65,7 @@ const handleSubmit = async () => {
         mobile_number: document.getElementById('Mobileno').value
     }
     try{
-        await axios.post(`http://127.0.0.1:8000/api/bills/`, input, {
+        await axios.post(`https://ms-messenger.onrender.com/api/bills/`, input, {
             headers: {
                 'Content-Type': 'application/json',
             }
@@ -87,7 +87,7 @@ const DeleteTask = async (e) => {
     const confirmDelete = window.confirm(`${bill.bill_no} will not be recovered.`)
     
     if(confirmDelete){
-        await axios.delete(`http://127.0.0.1:8000/api/bills/delete/${bill_id}`)
+        await axios.delete(`https://ms-messenger.onrender.com/api/bills/delete/${bill_id}`)
         
         // This is to check what tag is trigers 
         // Its explations
@@ -158,7 +158,7 @@ const saveEdit = async (e) => {
     };
 
     try {
-        await axios.patch(`http://127.0.0.1:8000/api/bills/edit/${targetId}`, updateData, {
+        await axios.patch(`https://ms-messenger.onrender.com/api/bills/edit/${targetId}`, updateData, {
             headers: {
                 'Content-Type': 'application/json',
             }
@@ -217,7 +217,7 @@ async function isCollectedUpdate(boolVal, id){
         collected: boolVal
     }
     try {
-        await axios.patch(`http://127.0.0.1:8000/api/bills/edit/${id}`, updateData, {
+        await axios.patch(`https://ms-messenger.onrender.com/api/bills/edit/${id}`, updateData, {
             headers: {
                 'Content-Type': 'application/json',
             }
