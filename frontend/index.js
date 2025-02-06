@@ -27,14 +27,16 @@ const htmlTaskContent = ({ id, bill_no, mobile_number, collected}) => `
 `;
 
 const loading = `
-    <div class="d-flex justify-content-center">
-        <div class="spinner-border" role="status">
-            <span class="visually-hidden">Loading...</span>
+    <div class='loading'>
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
         </div>
-    </div>
-    <div class="d-flex justify-content-center">
-        <div class="alert alert-secondary-emphasis m-2" role="alert">
-            Server restarting reload again ...
+        <div class="d-flex justify-content-center">
+            <div class="alert alert-secondary-emphasis m-2 txt" role="alert">
+                Loading Data ...
+            </div>
         </div>
     </div>
 `
@@ -42,20 +44,28 @@ const loading = `
 // State to tranfer data from permanent to temporary storage
 const state = {
     bill_list : [],
-};
+}; 
 
 // Bill data loader
 const LoadInitialData = async () => {
+    taskContent.insertAdjacentHTML("beforeend",loading)
+
     try {
         const localStorageCopy = await axios.get(`https://ms-messenger.onrender.com/api/bills/`)
-        if(localStorageCopy != null) state.bill_list = localStorageCopy.data; 
+        if (localStorageCopy.status == 200) {
+            state.bill_list = localStorageCopy.data 
+
+            const loadingElement = document.querySelector('.loading')
+            if(loadingElement) loadingElement.remove()
+
+            state.bill_list.map((bills) => {
+                taskContent.insertAdjacentHTML("beforeend",htmlTaskContent(bills))
+            })
+        }
     } catch (error) {
+        document.querySelector('.txt').innerHTML = "Server restarting reload again ..."
         taskContent.insertAdjacentHTML("beforeend",loading)
     }
-
-    state.bill_list.map((bills) => {
-        taskContent.insertAdjacentHTML("beforeend",htmlTaskContent(bills))
-    })
 }
 
 // Submit the data to Django
@@ -71,7 +81,7 @@ const handleSubmit = async () => {
             }
         })
     }catch(err){
-        alert("Data is not Added.")
+        window.alert("Data is not Added.")
     }
 }
 
@@ -165,7 +175,7 @@ const saveEdit = async (e) => {
         })
         
     } catch (error) {
-        alert(`${bill_No} is not updated.`)
+        window.alert(`${bill_No} is not updated.`)
     }
 
     bill_No.setAttribute("contenteditable", "false")
@@ -223,7 +233,7 @@ async function isCollectedUpdate(boolVal, id){
             }
         })
     } catch (error) {
-        alert(error)
+        window.alert(error)
     }
 }
 // Collection end here
