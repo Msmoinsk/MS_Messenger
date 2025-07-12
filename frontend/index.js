@@ -71,7 +71,7 @@ const handleSubmit = async () => {
             }
         })
     }catch(err){
-        alert("Data is not Added.")
+        window.alert("Data is not Added.")
     }
 }
 
