@@ -97,10 +97,21 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'postgres',
+        'USER': 'postgres.dflhylusnyliapbrpkql',
+        'PASSWORD': 'rdj369jfv',
+        'HOST': 'aws-0-ap-south-1.pooler.supabase.com',
+        'PORT': '6543',
+        'POOL_MODE': 'transaction',
     }
 }
+
+# USER = os.getenv("user")
+# PASSWORD = os.getenv("password")
+# HOST = os.getenv("host")
+# PORT = os.getenv("port")
+# DBNAME = os.getenv("dbname")
 
 
 # Password validation

@@ -6,3 +6,6 @@ djangorestframework-simplejwt
 pytz
 python-dotenv
 gunicorn
+psycopg2-binary
+psycopg2
+supabase
